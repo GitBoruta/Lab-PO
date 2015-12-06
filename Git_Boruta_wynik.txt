@@ -1,0 +1,26 @@
+Zadanie 1
+Przypadek a
+Wnioski: Program czasem wyrzuci ostrzerzenie, zasadniczo bezproblemowa morfizacja,
+wilka z typu Kreatura do typu Ork poprzez referencję.
+
+Przypadek b
+Wnioski: Wszystko objaśnione, żadnych problemów, jak widać kompilator po prostu
+obszedł za pomocą modyfikatora override wirtualną metodą.
+
+Przypadek c
+Wnioski: Sprzeczność. Byćmoże c++, by to zaakceptował, c# nie zamierza.
+Zgłasza błąd, gdyż modyfikator sealed uniemożliwia dziedziczenie,
+a modyfikator virtual jest używany aby podkreślić, że dana metoda może być
+zastąpiona przez metodę w klasie pochodnej.
+
+
+
+Zadanie 2
+Klasa generyczna
+Wnioski: Generyczność pozwala klasie być deklarowaną i instancjonowaną
+z użyciem dowolnego typu. Dzięki temu można zmieniać zastosowanie metod
+danej klasy w zależności od deklaracji i instancjonowania.
+
+Metoda generyczna
+Wnioski: Niezależnie od typu argumentu metody, brak zastrzerzeń, funkcja
+przekazuje przez referencję argument, działa.
