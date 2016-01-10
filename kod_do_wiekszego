@@ -1,0 +1,174 @@
+#include<iostream>
+#include<vector>
+#include<cmath>
+
+# define PI           3.14159265358979323846//Gratulacje dla idioty, który nie zawarł tego w cmath
+
+using namespace std;
+
+void wypisz(vector <int> do_wypisania)
+{
+	for (int i = 0; i < do_wypisania.size(); i++)
+	{
+		cout << do_wypisania[i] << " ";
+	}
+	cout << endl;
+}
+
+class wektorki
+{
+public:
+	wektorki();
+	~wektorki();
+
+	void mnoz(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie);
+	void dodaj(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie);
+	void odejmij(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie);
+	void kat(vector <int> wiekszy, vector <int> mniejszy);
+
+private:
+	double cos_wektorow(vector <int> wiekszy, vector <int> mniejszy);
+};
+
+int main()
+{
+	vector <int> v1;
+	vector <int> v2;
+	vector <int> v3;
+
+	wektorki licz = wektorki();
+
+	int wejscie;
+
+	cout << "Podaj elementy pierwszego wektora(eof konczy)!" << endl;//pobranie elementów pierwszego wektora
+	while (cin >> wejscie)
+	{
+		v1.push_back(wejscie);
+	}
+
+	cin.clear();//Czyszczę wejście(co za debil, uznał, że jest to nieobowiązkowe!!!)
+	cout << "Podaj elementy drugiego wektora(eof konczy)!" << endl;
+	while (cin >> wejscie)
+	{
+		v2.push_back(wejscie);
+	}
+
+	if (v1.size() == v2.size())
+	{
+		v3.resize(v1.size());
+		cout << "Taki sam rozmiar!" << endl;
+		licz.mnoz(v1, v2, v3);
+		cout << "Wynik mnozenia tych wektorow to: ";
+		wypisz(v3);
+		licz.dodaj(v1, v2, v3);
+		cout << "Wynik dodawania tych wektorow to: ";
+		wypisz(v3);
+		licz.odejmij(v1, v2, v3);
+		cout << "Wynik odejmowania tych wektorow to: ";
+		wypisz(v3);
+		licz.kat(v1, v2);
+	}
+	else if (v1.size()  > v2.size())
+	{
+		v2.resize(v1.size());
+		v3.resize(v2.size());
+		cout << "Pierwszy wketor wiekszy." << endl;
+		licz.mnoz(v1, v2, v3);
+		cout << "Wynik mnozenia tych wektorow to: ";
+		wypisz(v3);
+		licz.dodaj(v1, v2, v3);
+		cout << "Wynik dodawania tych wektorow to: ";
+		wypisz(v3);
+		licz.odejmij(v1, v2, v3);
+		cout << "Wynik odejmowania tych wektorow to: ";
+		wypisz(v3);
+		licz.kat(v1, v2);
+	}
+	else
+	{
+		v1.resize(v2.size());
+		v3.resize(v1.size());
+		cout << "Roznia sie, drugi wektor wiekszy." << endl;
+		licz.mnoz(v2, v1, v3);
+		cout << "Wynik mnozenia tych wektorow to: ";
+		wypisz(v3);
+		licz.dodaj(v2, v1, v3);
+		cout << "Wynik dodawania tych wektorow to: ";
+		wypisz(v3);
+		licz.odejmij(v2, v1, v3);
+		cout << "Wynik odejmowania tych wektorow to: ";
+		wypisz(v3);
+		licz.kat(v2, v1);
+	}
+	return 0;
+}
+
+wektorki::wektorki()
+{
+}
+
+wektorki::~wektorki()
+{
+}
+
+void wektorki::mnoz(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie)
+{
+	for (int i = 0; i < mniejszy.size(); i++)
+	{
+		wyjscie[i] = mniejszy[i] * wiekszy[i];
+	}
+}
+
+void wektorki::dodaj(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie)
+{
+	for (int i = 0; i < mniejszy.size(); i++)
+	{
+		wyjscie[i] = mniejszy[i] + wiekszy[i];
+	}
+}
+
+void wektorki::odejmij(vector <int> wiekszy, vector <int> mniejszy, vector <int> &wyjscie)
+{
+	for (int i = 0; i < mniejszy.size(); i++)
+	{
+		wyjscie[i] = wiekszy[i] - mniejszy[i];
+	}
+}
+
+double wektorki::cos_wektorow(vector <int> wiekszy, vector <int> mniejszy)
+{
+	double dot = 0, norma_w = 0, norma_m = 0, cos = 0;
+
+	for (int i = 0; i < mniejszy.size(); i++)//oblicza iloczyn skalarny wektorów
+	{
+		dot += mniejszy[i] * wiekszy[i];
+	}
+
+	for (int i = 0; i < mniejszy.size(); i++)//oblicza normę wektora
+	{
+		norma_m += pow(mniejszy[i], 2);
+	}
+	norma_m = sqrt(norma_m);
+
+	for (int i = 0; i < wiekszy.size(); i++)//oblicza normę wektora
+	{
+		norma_w += pow(wiekszy[i], 2);
+	}
+	norma_w = sqrt(norma_w);
+
+	cos = dot / (norma_w * norma_m);//wzór cosinusa
+	return cos;
+}
+
+void wektorki::kat(vector <int> wiekszy, vector <int> mniejszy)
+{
+	if (wiekszy.size() == 2 && mniejszy.size() == 2)
+	{
+		double kat = acos(cos_wektorow(wiekszy, mniejszy)) * 180 / PI;//oblicza arccos następnie konwertuje z radianów na stopnie
+		cout << "Kat pomiedzy tymi wektorami wynosi: " << kat << endl;
+	}
+	else
+	{
+		cout << "Te wektory nie sa dwuwymiarowe!" << endl;
+	}
+}
