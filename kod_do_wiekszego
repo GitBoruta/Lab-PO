@@ -72,7 +72,7 @@ int main()
 	{
 		v2.resize(v1.size());
 		v3.resize(v2.size());
-		cout << "Pierwszy wketor wiekszy." << endl;
+		cout << "Rozny rozmiar, pierwszy wketor wiekszy." << endl;
 		licz.mnoz(v1, v2, v3);
 		cout << "Wynik mnozenia tych wektorow to: ";
 		wypisz(v3);
@@ -88,7 +88,7 @@ int main()
 	{
 		v1.resize(v2.size());
 		v3.resize(v1.size());
-		cout << "Roznia sie, drugi wektor wiekszy." << endl;
+		cout << "Rozny rozmiar, drugi wektor wiekszy." << endl;
 		licz.mnoz(v2, v1, v3);
 		cout << "Wynik mnozenia tych wektorow to: ";
 		wypisz(v3);
