@@ -71,7 +71,7 @@ int main()
 	else if (v1.size()  > v2.size())
 	{
 		v3.resize(v2.size());
-		cout << "Pierwszy wketor wiekszy." << endl;
+		cout << "Rozna rozmiar, pierwszy wketor wiekszy." << endl;
 		licz.mnoz(v1, v2, v3);
 		cout << "Wynik mnozenia tych wektorow to: ";
 		wypisz(v3);
@@ -86,7 +86,7 @@ int main()
 	else
 	{
 		v3.resize(v1.size());
-		cout << "Drugi wektor wiekszy." << endl;
+		cout << "Rozna rozmiar, drugi wektor wiekszy." << endl;
 		licz.mnoz(v2, v1, v3);
 		cout << "Wynik mnozenia tych wektorow to: ";
 		wypisz(v3);
